@@ -39,6 +39,7 @@ var barlayout = {
 };
 
 Plotly.newPlot("bar",bar_data,barlayout);
+
 //build bubble chart
 
 var layoutbubble = {
@@ -53,8 +54,9 @@ var DataBubble = [
     mode:"markers",
     text:otu_labels,
     marker:{
-        color:id,
-        size:sample_values
+        color:otu_ids,
+        size:sample_values,
+        colorscale:"Earth"
     }
 }];
 Plotly.newPlot("bubble",DataBubble,layoutbubble);
