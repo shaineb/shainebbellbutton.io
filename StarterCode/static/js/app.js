@@ -1,4 +1,18 @@
 //  function to create bar chart and bubble chart
+function metadata( sample){ 
+    d3.json ("samples.json").then((data) => {
+        var metadata = data.metadata;
+        var filter_id_array = metadata.filter(sampleobject=>sampleobject.id == sample)
+        var  filter_id_result = filter_id_array[0];
+        var Panel = d3.select("#sample-metadata");
+        Panel.html("");
+        Object.entries(filter_id_result).forEach(([key,value]) => {
+        Panel.append("h6").text(`${key}:${value}`);
+        });
+    });
+}
+
+
 function bubblebarbuild( sample){ 
     d3.json ("samples.json").then((data) => {
         var bellybutton_id = data.samples;
@@ -7,7 +21,7 @@ function bubblebarbuild( sample){
         var  otu_ids = filter_id_result.otu_ids;
         var  otu_labels = filter_id_result.otu_labels;
         var sample_values = filter_id_result.sample_values; 
-    
+        
 var bar_data = [{
     x:sample_values.slice(0,10).reverse (),
     y:otu_ids.slice(0,10).map(otuID => `OTU ${otuID}`).reverse(),
