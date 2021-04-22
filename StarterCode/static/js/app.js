@@ -61,3 +61,28 @@ Plotly.newPlot("bubble",DataBubble,layoutbubble);
 
     });
     }
+function inti() {
+    // grab reference to dropdown select element
+    var selector = d3.select ("#selDataset");
+    // use list of sample names to populate select options
+    d3.json ("samples.json").then((data) => {
+        var names = data.names;
+        names.forEach((sample) => {
+            selector
+            .append("option")
+            .text(sample)
+            .property("value",sample);
+            
+        });
+    const first_name = names[0];
+    bubblebarbuild(first_name);
+    metadata(first_name);
+    });
+}
+function change( nextmove){
+    bubblebarbuild(nextmove);
+    metadata(nextmove);  
+} 
+inti();
+
+
